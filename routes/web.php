@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // controller
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\DashboardController;
@@ -12,7 +12,7 @@ use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\Admin\DashboardController AS AdminController;
-
+use App\Http\Controllers\Admin\CategoryController AS CategoryAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\DashboardController AS AdminController;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/categories',[CategoryController::class,'index'])->name('category.index');
+Route::get('/categories',[DashboardCategoryController::class,'index'])->name('category.index');
 Route::get('/cart',[CartController::class,'index'])->name('cart');
 Route::get('/success',[CartController::class,'success'])->name('success');
 Route::get('/detail/{id}',[DetailController::class,'index'])->name('detail');
@@ -47,6 +47,7 @@ Route::get('/dashboard/setting',[DashboardSettingController::class,'store'])->na
 Route::get('/dashboard/account',[DashboardSettingController::class,'index'])->name('dashboard.setting.account');
 
 // admin dashboard
-Route::prefix('admin')->namespace('Admin')->group(function (){
+Route::prefix('admin')->group(function (){
         Route::get('/',[AdminController::class,'index'])->name('admin.dashboard');
+        Route::resource('/category',CategoryAdminController::class);
 });
