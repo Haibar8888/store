@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Categories Dashboard | BWA Store')
+@section('title', 'User Dashboard | BWA Store')
 
 @section('content')
          <div
@@ -9,7 +9,7 @@
           >
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">List Categoriees</h2>
+                <h2 class="dashboard-title">List User</h2>
                 <p class="dashboard-subtitle">
                   Look what you have made today!
                 </p>
@@ -21,7 +21,7 @@
                         <div class="card-body">
                           <div class="row">
                             <div class="col-4">
-                              <a href="{{route('category.create')}}" class="btn btn-primary">Tambah Category</a>
+                              <a href="{{route('user.create')}}" class="btn btn-primary">Tambah User</a>
                             </div>
                           </div>
                           <div class="row mt-3">
@@ -33,8 +33,8 @@
                                     <tr>
                                       <th>ID</th>
                                       <th>Name</th>
-                                      <th>Photo</th>
-                                      <th>Slug</th>
+                                      <th>Email</th>
+                                      <th>Role</th>
                                       <th>Aksi</th>
                                     </tr>
                                   </thead>
@@ -67,8 +67,8 @@
                 columns : [
                   {data : 'id',name : 'id'},
                   {data : 'name',name : 'name'},
-                  {data : 'photo',name : 'photo'},
-                  {data : 'slug',name : 'slug'},
+                  {data : 'email',name : 'email',width : '10%'},
+                  {data : 'roles',name : 'role'},
                   {
                     data : 'action',
                     name : 'action',

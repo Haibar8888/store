@@ -6,17 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 // request validation
-use App\Http\Requests\Admin\CategoryRequest;
-use App\Http\Requests\Admin\UpdateCategoryRequest;
+use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 // datatable
 use Yajra\DataTables\Facades\DataTables;
 
 // model
-use App\Models\Category;
+use App\Models\User;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +29,7 @@ class CategoryController extends Controller
         //
         if(request()->ajax())
         {
-            $query = Category::query();
+            $query = User::query();
 
             return DataTables::of($query)
                 ->addColumn('action',function($item){
@@ -38,8 +39,8 @@ class CategoryController extends Controller
                                 Action
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href=" '. route('category.edit',$item->id) .' ">Edit</a>
-                                <form method="POST" action="'.route('category.destroy',$item->id).'">
+                                <a class="dropdown-item" href=" '. route('user.edit',$item->id) .' ">Edit</a>
+                                <form method="POST" action="'.route('user.destroy',$item->id).'">
                                     '.method_field('DELETE'). csrf_field() .'
                                     <button type="submit" class="dropdown-item text-danger">
                                         delete
@@ -56,7 +57,7 @@ class CategoryController extends Controller
                 ->make();
 
         }
-        return view('pages.admin.category.index');
+        return view('pages.admin.user.index');
     }
 
     /**
@@ -67,7 +68,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('pages.admin.category.create');
+        return view('pages.admin.user.create');
     }
 
     /**
@@ -76,16 +77,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(UserRequest $request)
     {
         //
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category','public');
+        $data['password'] = Hash::make($request->password);
 
-        Category::create($data);
+        User::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -108,8 +108,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
-        $item = Category::findOrFail($id);
-        return view('pages.admin.category.edit',compact('item'));
+        $item = User::findOrFail($id);
+        return view('pages.admin.user.edit',compact('item'));
     }
 
     /**
@@ -119,20 +119,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         //
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
+        
+        $item = User::findOrFail($id);
 
-        if ($request->photo !== null) {
-            $data['photo'] = $request->file('photo')->store('assets/category','public');
+         if($request->password === null) {
+           $data['password'] = $item->password;
+        }else{
+             $data['password'] = Hash::make($request->password);
         }
 
-        $item = Category::findOrFail($id);
         $item->update($data);
-        
-        return redirect()->route('category.index');
+       
+        return redirect()->route('user.index');
     }
 
     /**
@@ -144,9 +146,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
-        $item = Category::findOrFail($id);
+        $item = User::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('user.index');
     }
 }

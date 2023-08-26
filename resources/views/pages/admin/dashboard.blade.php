@@ -23,7 +23,7 @@
                           Customer
                         </div>
                         <div class="dashboard-card-subtitle">
-                          Rp.{{$costumer}}
+                          {{$costumer}}
                         </div>
                       </div>
                     </div>

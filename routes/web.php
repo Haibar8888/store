@@ -13,6 +13,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\Admin\DashboardController AS AdminController;
 use App\Http\Controllers\Admin\CategoryController AS CategoryAdminController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,6 @@ Route::get('/dashboard/account',[DashboardSettingController::class,'index'])->na
 Route::prefix('admin')->group(function (){
         Route::get('/',[AdminController::class,'index'])->name('admin.dashboard');
         Route::resource('/category',CategoryAdminController::class);
+        Route::resource('/user',UserController::class);
+        
 });
