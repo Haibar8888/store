@@ -68,7 +68,7 @@
                   {data : 'id',name : 'id'},
                   {data : 'name',name : 'name'},
                   {data : 'email',name : 'email',width : '10%'},
-                  {data : 'roles',name : 'role'},
+                  {data : 'roles',name : 'roles'},
                   {
                     data : 'action',
                     name : 'action',

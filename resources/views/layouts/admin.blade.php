@@ -32,9 +32,14 @@
               >Dashboard</a
             >
             <a
-              href="/dashboard-products.html"
-              class="list-group-item list-group-item-action"
+              href="{{route('product.index')}}"
+              class="list-group-item list-group-item-action {{request()->is('admin/product') ? ' active' : ''}}"
               >Products</a
+            >
+            <a
+              href="{{route('product-gallery.index')}}"
+              class="list-group-item list-group-item-action {{request()->is('admin/product-gallery*') ? ' active' : ''}}"
+              >Products Gallery</a
             >
             <a
               href="{{route('category.index')}}"

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Product Dashboard | BWA Store')
+@section('title', 'Tambah Product Gallery Dashboard | BWA Store')
 
 @section('content')
          <div
@@ -9,7 +9,7 @@
           >
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">List Product</h2>
+                <h2 class="dashboard-title">Tambah Product Gallery</h2>
                 <p class="dashboard-subtitle">
                     Create New Product
                 </p>
@@ -28,43 +28,23 @@
                         @endif
                       <div class="card">
                         <div class="card-body">
-                            <form action="{{route('product.store')}}" method="POST">
+                            <form action="{{route('product-gallery.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row justify-content-center">
                                     <div class="col-md-10">
                                         <div class="form-group">
-                                            <label for="name">Name Product</label>
-                                            <input type="text" name="name" class="form-control" >
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="user_id">User Product</label>
-                                            <select name="user_id" id="user_id" class="form-control">
+                                            <label for="products_id">Product</label>
+                                            <select name="products_id" id="products_id" class="form-control">
                                                     <option value="">Pilih</option>
-                                                @foreach($users as $item)
+                                                @foreach($product as $item)
                                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="categories_id">Kategori Product</label>
-                                            <select name="categories_id" id="categories_id" class="form-control">
-                                                    <option value="">Pilih</option>
-                                                @foreach($category as $item)
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                      
-                                         <div class="form-group">
-                                            <label for="price">Harga Product</label>
-                                            <input type="number" name="price" class="form-control" >
-                                        </div>
-
-                                         <div class="form-group">
-                                            <label for="description">Deskripsi Product</label>
-                                            <textarea name="description" id="editor"></textarea>
+                                          <div class="form-group">
+                                            <label for="foto">Foto Product</label>
+                                            <input type="file" name="photo" class="form-control" required >
                                         </div>
 
                                         <div class="form-group text-right justify-content-end">

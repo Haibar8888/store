@@ -16,7 +16,7 @@ class Product extends Model
     // use HasFactory;
     use SoftDeletes;
     
-    // protected $table = 'Pr';
+    protected $table = 'products';
 
     protected $fillable = [
         'name',
@@ -30,14 +30,14 @@ class Product extends Model
     protected $hidden = [];
 
     public function galleries () {
-        return $this->hasMany(ProductGallery::class,'products_id','id');
+        return $this->hasMany(ProductGallery::class,'products_id','id'); // foreign key dulu local key has many
     }
 
     public function user () {
-        return $this->hasOne(User::class,'user_id','id');
+        return $this->hasOne(User::class,'id','user_id'); // local key dulu foreign key has has one
     }
 
     public function category () {
-        return $this->belongsTo(Category::class,'categories_id','id');
+        return $this->belongsTo(Category::class,'categories_id','id'); 
      }
 }

@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\Admin\DashboardController AS AdminController;
 use App\Http\Controllers\Admin\CategoryController AS CategoryAdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,5 +54,6 @@ Route::prefix('admin')->group(function (){
         Route::get('/',[AdminController::class,'index'])->name('admin.dashboard');
         Route::resource('/category',CategoryAdminController::class);
         Route::resource('/user',UserController::class);
-        
+        Route::resource('/product',ProductController::class);
+        Route::resource('/product-gallery',ProductGalleryController::class);
 });
