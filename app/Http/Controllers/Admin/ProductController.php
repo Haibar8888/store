@@ -85,8 +85,6 @@ class ProductController extends Controller
         //
         $data = $request->all();
        
-        $data['slug'] = Str::slug($request->name);
-
         Product::create($data);
 
         return redirect()->route('product.index');

@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="row">
-             @php
+            @php
               $productIncrement = 0;
             @endphp
             @forelse ($product as $item)
@@ -110,7 +110,7 @@
                 data-aos="fade-up"
                 data-aos-delay="{{$productIncrement += 100}}"
               >
-                <a class="component-products d-block" href="{{route('detail',$item->slug)}}">
+                <a class="component-products d-block" href="">
                   <div class="products-thumbnail">
                     <div
                       class="products-image"
