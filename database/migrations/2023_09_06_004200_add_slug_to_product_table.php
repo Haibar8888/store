@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToProductsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddSlugToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->string('slug')->after('categories_id');
+            $table->string('slug')->nullable()->after('categories_id');
         });
     }
 
@@ -31,4 +31,4 @@ class AddSlugToProductsTable extends Migration
             $table->dropColumn('slug');
         });
     }
-}
+};

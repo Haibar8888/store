@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->foreignId('user_id');
             $table->foreignId('categories_id');
+           
             $table->integer('price');
             $table->longText('description');
             $table->softDeletes();
