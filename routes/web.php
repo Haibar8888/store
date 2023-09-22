@@ -44,7 +44,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/categories',[DashboardCategoryController::class,'index'])->name('category');
 Route::get('/categories/detail/{slug}',[DashboardCategoryController::class,'detail'])->name('category.detail');
+// cart
 Route::get('/cart',[CartController::class,'index'])->name('cart');
+// cart delete
+Route::delete('/cart/{id}',[CartController::class,'delete'])->name('cart-delete');
 Route::get('/success',[CartController::class,'success'])->name('success');
 // detail
 Route::get('/detail/{slug}',[DetailController::class,'index'])->name('detail');

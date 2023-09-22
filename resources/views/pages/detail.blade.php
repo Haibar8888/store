@@ -168,7 +168,7 @@
         mounted() {
           AOS.init();
         },
-        data: {
+      data: {
           activePhoto: 3,
           photos: [
             @foreach($product->galleries as $gallery)
